@@ -1,4 +1,3 @@
-import type { Character } from "../gameplay/story";
 export type Choice = {
   label: string;
   detail: string;
@@ -14,7 +13,12 @@ export type Task = {
   done: string;
   item?: string;
   choices?: Choice[];
+  // Short field puzzle rendered in the task panel instead of a choice list.
+  puzzle?: "wave" | "socket" | "blink";
 };
+// run: chase to the exit · hide: patrols, stay in shadow · defend: hold until
+// the gate opens · quiet: no chase unless the quiz failed or the area is alerted.
+export type EscapeMode = "run" | "hide" | "defend" | "quiet";
 export type Mission = {
   act: string;
   title: string;
@@ -28,6 +32,9 @@ export type Mission = {
   exit: string;
   villain: string;
   hint: string;
+  escape: EscapeMode;
+  // Field step 2 sets off an alarm that wails until the chapter ends.
+  alarm?: boolean;
 };
 export const missions: Mission[] = [
   {
@@ -76,6 +83,8 @@ export const missions: Mission[] = [
     exit: "Keluar lewat pintu servis",
     villain: "“Buka pintu depan. Di luar aman.”",
     hint: "Ikuti label amber. Pintu depan masih berbahaya.",
+    escape: "run",
+    alarm: true,
   },
   {
     act: "01 / MINIMARKET",
@@ -98,31 +107,19 @@ export const missions: Mission[] = [
         label: "PILIH SUMBER",
         x: 660,
         icon: "relay",
-        instruction: "Bandingkan dua kanal. Pilih sumber rekaman palsu.",
-        done: "relay-core teridentifikasi sebagai sumber panggilan palsu.",
-        choices: [
-          {
-            label: "Kanal A · relay-core",
-            detail: "“Di luar aman.” Kalimat dan jeda selalu sama.",
-            correct: true,
-            feedback: "Pola berulang cocok dengan rekaman.",
-          },
-          {
-            label: "Kanal B · relay-decoy",
-            detail: "Petugas menjawab pertanyaan dan menyebut posisi terbaru.",
-            correct: false,
-            feedback:
-              "Kanal B merespons langsung. Cari kanal yang selalu mengulang kalimat sama.",
-          },
-        ],
+        instruction:
+          "Amati dua gelombang. Rekaman selalu mengulang pola yang sama.",
+        done: "Sumber rekaman ditandai sebagai relay-core.",
+        puzzle: "wave",
       },
     ],
     device: "PEMUTUS RELAY",
     quiz: "Matikan hanya #relay-core dengan fadeOut() agar sinyal palsu meredup.",
     effect: "Beacon palsu padam. Koordinat klinik ditemukan.",
-    exit: "Pindah POV · menuju klinik",
+    exit: "Menuju klinik",
     villain: "“Kamu akan kembali mendengarkan.”",
     hint: "Cocokkan pola pesan, bukan nama kanal saja.",
+    escape: "quiet",
   },
   {
     act: "02 / KLINIK",
@@ -155,6 +152,7 @@ export const missions: Mission[] = [
     exit: "Buka akses ruang observasi",
     villain: "“Lepaskan semua pelindungnya.”",
     hint: "Air membantu mengungkap target; jangan mengikuti perintah Sang Penyiar.",
+    escape: "run",
   },
   {
     act: "02 / KLINIK",
@@ -199,9 +197,10 @@ export const missions: Mission[] = [
     device: "PENANDA ANCAMAN",
     quiz: 'Tambahkan marked pada .enemy dengan data-threat="high". Jangan tandai ally atau ancaman rendah.',
     effect: "Ancaman tinggi ditandai. Penyintas klinik mendapat jalur aman.",
-    exit: "Pindah POV · menuju stasiun",
+    exit: "Menuju stasiun",
     villain: "“Yang demam itu musuhmu.”",
     hint: "Gunakan bukti scan, bukan suhu tubuh saja.",
+    escape: "hide",
   },
   {
     act: "03 / STASIUN",
@@ -248,6 +247,7 @@ export const missions: Mission[] = [
     exit: "Masuk jalur pemeliharaan",
     villain: "“Gerbong biru. Cepat.”",
     hint: "Lampu amber menandai sektor B.",
+    escape: "run",
   },
   {
     act: "03 / STASIUN",
@@ -270,31 +270,18 @@ export const missions: Mission[] = [
         label: "SOKET DAYA",
         x: 650,
         icon: "battery",
-        instruction: "Pasang sekring biru ke soket yang cocok.",
+        instruction: "Lampu berkedip. Warna soket hanya terlihat saat terang.",
         done: "Panel servis menyala. Lepas kunci, lalu tampilkan gerbang.",
-        choices: [
-          {
-            label: "Soket biru · daya servis",
-            detail: "Simbol sekring cocok dengan peta.",
-            correct: true,
-            feedback: "Sekring terpasang. Daya servis pulih.",
-          },
-          {
-            label: "Soket merah · alarm darurat",
-            detail: "Terhubung ke pengeras suara stasiun.",
-            correct: false,
-            feedback:
-              "Itu jalur alarm. Sekring biru cocok dengan soket daya servis.",
-          },
-        ],
+        puzzle: "socket",
       },
     ],
     device: "AKSES SERVIS",
     quiz: "Pada #exit-gate, hapus locked lebih dulu, lalu show() untuk menampilkan pintu.",
-    effect: "Gerbang servis muncul. Jalur menuju menara terbuka.",
-    exit: "Pindah POV · naik ke menara",
+    effect: "Gerbang servis muncul, tetapi macet. Pukul sampai terbuka.",
+    exit: "Naik ke menara",
     villain: "“Tidak ada jalan di belakang pintu itu.”",
     hint: "Warna dan simbol sekring harus sama dengan soket.",
+    escape: "defend",
   },
   {
     act: "04 / MENARA",
@@ -309,40 +296,28 @@ export const missions: Mission[] = [
         x: 250,
         icon: "radio",
         instruction: "Tekan sakelar uji di penerima radio.",
-        done: "Lampu pemancar padam tiga kali. Partner asli bisa melihatnya; rekaman tidak.",
-        item: "Uji tiga kedipan",
+        done: "Pos evakuasi asli memantau lampu ini lewat kamera. Rekaman tidak bisa.",
+        item: "Sakelar uji",
       },
       {
         id: "verify",
         label: "VERIFIKASI SUARA",
         x: 650,
         icon: "radio",
-        instruction: "Pilih suara yang merespons uji lampu barusan.",
-        done: "Kanal partner terverifikasi. Pasang handler pulse untuk memutus jammer.",
-        choices: [
-          {
-            label: "“AMBER-07. Buka pintu merah!”",
-            detail: "Menyebut kode, tetapi mengabaikan uji lampu.",
-            correct: false,
-            feedback:
-              "Kode bisa dicuri. Cari respons terhadap lampu yang baru saja diuji.",
-          },
-          {
-            label: "“Tiga kedipan. Gue lihat. Putus jammer!”",
-            detail: "Merespons perubahan fisik di ruang pemancar.",
-            correct: true,
-            feedback: "Ini kanal partner yang asli.",
-          },
-        ],
+        instruction:
+          "Hitung kedipan lampu, lalu pilih suara yang menyebut jumlah yang benar.",
+        done: "Pos evakuasi asli terverifikasi. Pasang handler untuk memutus jammer.",
+        puzzle: "blink",
       },
     ],
     device: "PULSE-SWITCH",
     quiz: "Pasang handler click pada #pulse-switch. Di dalam function, sembunyikan .jammer. Lalu tekan sakelar.",
     effect:
-      "Jammer padam. Sang Penyiar kehilangan saluran untuk meniru partner.",
+      "Jammer padam. Sang Penyiar kehilangan saluran untuk meniru pos evakuasi.",
     exit: "Masuk ruang inti",
-    villain: "“Ini gue. Buka pintunya.”",
-    hint: "Periksa respons uji lampu, bukan kode yang bisa dicuri.",
+    villain: "“Ini pos evakuasi. Buka pintunya.”",
+    hint: "Kode bisa dicuri. Yang asli bisa melihat lampu yang kamu uji.",
+    escape: "quiet",
   },
   {
     act: "04 / MENARA",
@@ -391,14 +366,9 @@ export const missions: Mission[] = [
     exit: "Evakuasi · selesaikan perjalanan",
     villain: "“Aku tahu suaramu.”",
     hint: "Pancing inti dengan rekaman, lalu lepaskan shield sebelum purge.",
+    escape: "run",
   },
 ];
-export function pov(opening: Character, room: number): Character {
-  return room % 2 === 0 ? opening : opening === "noah" ? "allie" : "noah";
-}
-export function partner(opening: Character, room: number): Character {
-  return pov(opening, room) === "noah" ? "allie" : "noah";
-}
 export function clampProgress(value: unknown, completed: boolean) {
   return completed
     ? 2

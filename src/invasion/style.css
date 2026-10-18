@@ -1709,3 +1709,548 @@ kbd {
   border-radius: 30px;
   background: transparent;
 }
+/* Escape tension: a red edge that tightens as the nearest hunter closes in. */
+#danger {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: var(--danger, 0);
+  background: radial-gradient(
+    ellipse at center,
+    transparent 48%,
+    #8a1a0c55 78%,
+    #b3230fbb 100%
+  );
+  transition: opacity 0.15s linear;
+}
+.plot-reveal p.reveal-rank {
+  font: 12px monospace;
+  letter-spacing: 2px;
+  color: #9cffe3;
+  border-left: 2px solid #9cffe3;
+  padding-left: 12px;
+}
+.result-card #resultRanks {
+  font: 12px monospace;
+  letter-spacing: 1px;
+  color: #9cffe3;
+}
+.result-card #resultRanks:empty {
+  display: none;
+}
+/* Identity: name on its own row, NIM + kelas side by side. */
+.landing .identity {
+  flex-wrap: wrap;
+  max-width: 420px;
+}
+.landing .identity label:first-child {
+  flex-basis: 100%;
+}
+.link-button {
+  margin-top: 18px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.link-button:hover {
+  background: none;
+  color: var(--amber);
+}
+/* Briefing after the intro. */
+.briefing-card {
+  width: min(680px, 100%);
+}
+.briefing-card p {
+  line-height: 1.55;
+  color: #c9d4cc;
+}
+.briefing-card b {
+  color: var(--amber);
+  font-weight: 600;
+}
+.controls-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin: 18px 0;
+  font-size: 13px;
+  color: #c9d4cc;
+}
+.controls-grid kbd {
+  margin-right: 4px;
+}
+.briefing-card .grade-line {
+  font-size: 13px;
+  color: var(--muted);
+  border-left: 2px solid var(--amber);
+  padding-left: 12px;
+}
+.briefing-card .primary {
+  margin-top: 8px;
+}
+/* Field puzzles. */
+#taskInstruction:not([hidden]) {
+  display: block;
+  color: #c9d4cc;
+}
+#taskChoices.puzzle {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.wave-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background: #17282d;
+  text-align: left;
+}
+.wave-row strong {
+  width: 70px;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+.wave-bars {
+  flex: 1;
+  height: 56px;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+.wave-bars i {
+  flex: 1;
+  background: #9cffe3;
+  opacity: 0.75;
+  border-radius: 2px 2px 0 0;
+}
+.socket-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  padding: 26px 0;
+  background: #05090c;
+  border-radius: 8px;
+}
+.socket {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid #2c4146;
+  background: #10181b;
+  display: grid;
+  place-items: center;
+  transition:
+    background 0.08s,
+    border-color 0.08s;
+}
+.socket-name {
+  font: 10px monospace;
+  letter-spacing: 1px;
+  color: transparent;
+}
+.socket-row.lit .socket-biru {
+  background: #2f6fd1;
+  border-color: #8fb8ff;
+}
+.socket-row.lit .socket-merah {
+  background: #b8432f;
+  border-color: #ff9c86;
+}
+.socket-row.lit .socket-hijau {
+  background: #3c8a4f;
+  border-color: #9be2a9;
+}
+.socket-row.lit .socket-name {
+  color: #fff;
+}
+.test-lamp {
+  width: 70px;
+  height: 70px;
+  margin: 8px auto 0;
+  border-radius: 50%;
+  background: #2a2216;
+  border: 3px solid #4a3c27;
+}
+.test-lamp.on {
+  background: #ffd98a;
+  box-shadow: 0 0 40px #ffcf6e;
+}
+.lamp-status {
+  text-align: center;
+  color: var(--muted);
+}
+.voice-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.voice-options .field-choice {
+  min-height: 70px;
+}
+@media (max-width: 520px) {
+  .voice-options {
+    grid-template-columns: 1fr;
+  }
+  .socket {
+    width: 74px;
+    height: 74px;
+  }
+}
+/* Proof of completion. */
+.proof {
+  text-align: left;
+  margin: 18px 0;
+  padding: 16px 18px;
+  border: 1px solid #e3bd7855;
+  border-radius: 8px;
+  background: #0a1418;
+}
+.proof dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+.proof dt {
+  color: var(--muted);
+}
+.proof dd {
+  margin: 0;
+}
+#proofStatus {
+  font-size: 12px;
+  color: var(--muted);
+  word-break: break-all;
+}
+.card .socket {
+  border-radius: 50%;
+}
+.result-card {
+  max-height: calc(100svh - 32px);
+  overflow-y: auto;
+}
+/* Intro as a radio log: plain lines, no narration. */
+.cinema-log {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 16%;
+  max-width: 820px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 13px/1.5 monospace;
+  transition: opacity 0.8s;
+}
+.cinema-log li {
+  display: grid;
+  grid-template-columns: 84px 150px 1fr;
+  gap: 14px;
+  padding: 7px 0;
+  border-top: 1px solid #ffffff12;
+  color: #9aa59c;
+  opacity: 0;
+  animation: log-in 0.5s forwards;
+}
+.cinema-log b {
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #adc4b5;
+}
+.cinema-log li.odd b {
+  color: #d49c80;
+}
+.cinema-log li.odd span {
+  color: #f1e6d8;
+}
+.beat-3 .cinema-log {
+  opacity: 0;
+}
+@keyframes log-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 700px) {
+  .cinema-log li {
+    grid-template-columns: auto 1fr;
+    gap: 4px 12px;
+  }
+  .cinema-log span {
+    grid-column: 1 / -1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinema-log li {
+    animation: none;
+    opacity: 1;
+  }
+}
+.cinematic.still .cinema-log li {
+  animation: none;
+  opacity: 1;
+}
+/* DOM simulation after a quiz answer. */
+.simulation {
+  margin: 14px 0 4px;
+  padding: 14px 16px;
+  border: 1px solid #2c4146;
+  border-radius: 8px;
+  background: #060d10;
+}
+.sim-title {
+  margin: 0 0 8px;
+  font: 10px monospace;
+  letter-spacing: 2px;
+  color: var(--amber);
+}
+.sim-code {
+  margin: 0 0 12px;
+  min-height: 1.4em;
+  font: 13px/1.4 monospace;
+  color: #9cffe3;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.sim-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  padding: 6px 9px;
+  border: 1px solid #2c4146;
+  border-radius: 6px;
+  background: #0e1a1e;
+  font: 12px monospace;
+  color: #c9d4cc;
+  transition:
+    opacity 0.5s,
+    border-color 0.25s,
+    box-shadow 0.25s,
+    transform 0.25s;
+}
+.chip b {
+  font-weight: 600;
+}
+.chip.child {
+  margin-left: 14px;
+}
+.chip.is-hidden {
+  opacity: 0.35;
+  border-style: dashed;
+}
+.chip .tag {
+  font-style: normal;
+  color: #9dafa8;
+}
+.chip .attr {
+  font-style: normal;
+  color: #d7a88f;
+}
+.chip .tag.added {
+  color: #9cffe3;
+  font-weight: 600;
+}
+.chip .tag.removed {
+  text-decoration: line-through;
+  color: #ff8a6e;
+}
+.chip .handler {
+  font-style: normal;
+  color: #f3d99b;
+}
+.chip.hit {
+  border-color: #9cffe3;
+  box-shadow: 0 0 0 1px #9cffe3 inset;
+}
+.chip.wrong {
+  border-color: #ff8a6e;
+  box-shadow: 0 0 0 1px #ff8a6e inset;
+}
+.chip.missed {
+  border-color: #e3bd78;
+  border-style: dashed;
+}
+.chip.clicked {
+  transform: scale(0.95);
+}
+.chip.gone {
+  opacity: 0.2;
+  text-decoration: line-through;
+}
+.chip.fading {
+  opacity: 0.15;
+  transition-duration: 1.2s;
+}
+.sim-verdict {
+  margin: 12px 0 0;
+  font-size: 13px;
+  min-height: 1.3em;
+}
+.sim-verdict.ok {
+  color: #9cffe3;
+}
+.sim-verdict.bad {
+  color: #ff8a6e;
+}
+/* In-game guide. */
+.guide-card {
+  width: min(820px, 100%);
+  max-height: calc(100svh - 32px);
+  display: flex;
+  flex-direction: column;
+}
+.guide-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 12px;
+}
+.guide-nav button {
+  min-width: 40px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.guide-nav button.current {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+.guide-body {
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 6px;
+}
+.guide-body section {
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+.guide-body section.current {
+  border-left: 2px solid var(--amber);
+  padding-left: 14px;
+}
+.guide-body h3 {
+  margin: 4px 0 10px;
+  font-size: 19px;
+}
+.guide-body small {
+  font: 10px monospace;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+.guide-now {
+  margin: 0 0 6px;
+  font: 11px monospace;
+  letter-spacing: 1px;
+  color: var(--amber);
+}
+.guide-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.guide-steps b {
+  font-size: 13px;
+  color: #e2e8de;
+}
+.guide-steps p {
+  margin: 3px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #c0ccc4;
+}
+.guide-steps code {
+  display: block;
+  margin-top: 6px;
+  padding: 6px 9px;
+  border-radius: 5px;
+  background: #060d10;
+  font: 12px monospace;
+  color: #9cffe3;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.landing-content .link-button {
+  display: block;
+  margin-top: 12px;
+}
+/* Landing form: one column width for cards, fields and button, sized so the
+   whole form fits the first screen on laptops as well as phones. */
+.landing-content {
+  box-sizing: content-box;
+  width: 420px;
+  max-width: none;
+  min-height: 100svh;
+  padding: 28px 0 28px 6vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.landing .brand {
+  margin-bottom: clamp(12px, 4vh, 36px);
+}
+.landing h1 {
+  font-size: clamp(56px, min(9vw, 12vh), 120px);
+  margin: 0 0 10px;
+}
+.landing .tagline {
+  font-size: 20px;
+  margin: 0 0 clamp(14px, 3vh, 28px);
+}
+.landing .characters,
+.landing .identity,
+#startForm .actions {
+  width: 100%;
+  max-width: none;
+}
+.landing .identity {
+  margin: 14px 0 0;
+  gap: 10px;
+}
+.landing .identity input {
+  height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+#startForm .actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+#startForm .actions button {
+  flex: 1;
+  min-height: 46px;
+}
+.landing-content .link-button {
+  align-self: flex-start;
+  margin-top: 14px;
+}
+#startError:empty {
+  display: none;
+}
+@media (max-width: 700px) {
+  .landing-content {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 28px 24px;
+    justify-content: flex-start;
+  }
+}

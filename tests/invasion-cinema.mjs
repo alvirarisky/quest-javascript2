@@ -16,6 +16,7 @@ try {
   await page.goto((process.env.BASE_URL || "http://127.0.0.1:5173") + "/?qa=1");
   await page.locator("#name").fill("Cinema QA");
   await page.locator("#student").fill("CINE");
+  await page.locator("#kelas").fill("QA");
   await page.waitForFunction(() => !document.querySelector("#start").disabled);
   await page.locator("#start").click();
   await page.locator("#cinematic").waitFor();
@@ -43,6 +44,13 @@ try {
   );
   await page.screenshot({ path: "artifacts/invasion/09-title.png" });
   await page.locator("#cinematic").waitFor({ state: "hidden" });
+  // The briefing follows the intro and still holds the world.
+  await page.locator("#briefing").waitFor();
+  assert.equal(
+    await page.evaluate(() => window.__invasion.world.blocked),
+    true,
+  );
+  await page.locator("#beginMission").click();
   assert.equal(
     await page.evaluate(() => window.__invasion.world.blocked),
     false,
@@ -64,9 +72,11 @@ try {
   await page.locator("#cinematic").waitFor();
   await page.keyboard.press("Escape");
   assert.equal(await page.locator("#cinematic").isVisible(), false);
+  await page.keyboard.press("Escape");
+  assert.equal(await page.locator("#briefing").isVisible(), false);
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: natural intro, movement lock, reduced motion, subtitle expiry, resume bypass, Escape skip.",
+    "PASS: natural intro, briefing, movement lock, reduced motion, subtitle expiry, resume bypass, Escape skip.",
   );
 } finally {
   await browser.close();

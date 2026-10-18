@@ -6,7 +6,7 @@ export function handle(action: string, body: unknown) {
   const b = body as Record<string, unknown>;
   if (action === "resume") return { state: verify(b.token) };
   if (action === "start")
-    return start(b.mode === "story" ? "story" : undefined);
+    return start(b.mode === "story" ? "story" : undefined, b.identity);
   if (action === "question") return question(b.token);
   if (action === "submit")
     return b.choice !== undefined

@@ -10,7 +10,7 @@ const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
 const base = process.env.BASE_URL || "http://127.0.0.1:5173";
-const saveKey = "dead-signal-story-v2";
+const saveKey = "dead-signal-story-v3";
 async function ready() {
   await page.waitForFunction(
     () =>
@@ -32,6 +32,7 @@ try {
   await ready();
   await page.locator("#name").fill("Audit");
   await page.locator("#student").fill("TEST");
+  await page.locator("#kelas").fill("QA");
   await page.route("**/api/run/start", (r) => r.abort());
   await page.locator("#start").click();
   await page.waitForFunction(() => !document.querySelector("#start").disabled);
@@ -41,6 +42,8 @@ try {
   await page.locator("#play").waitFor();
   if (await page.locator("#cinematic").isVisible())
     await page.locator("#skipIntro").click();
+  if (await page.locator("#briefing").isVisible())
+    await page.locator("#beginMission").click();
   const saved = await page.evaluate(
     (key) => JSON.parse(localStorage.getItem(key)),
     saveKey,
@@ -56,6 +59,8 @@ try {
   await page.locator("#play").waitFor();
   if (await page.locator("#cinematic").isVisible())
     await page.locator("#skipIntro").click();
+  if (await page.locator("#briefing").isVisible())
+    await page.locator("#beginMission").click();
   assert.equal(await page.evaluate(() => window.__invasion.world.wave), 0);
   assert.equal(await page.evaluate(() => window.__invasion.world.progress), 0);
   assert.equal(
@@ -121,10 +126,13 @@ try {
   await page.setViewportSize({ width: 667, height: 375 });
   await page.locator("#name").fill("Landscape");
   await page.locator("#student").fill("TEST");
+  await page.locator("#kelas").fill("QA");
   await page.locator("#start").click();
   await page.locator("#play").waitFor();
   if (await page.locator("#cinematic").isVisible())
     await page.locator("#skipIntro").click();
+  if (await page.locator("#briefing").isVisible())
+    await page.locator("#beginMission").click();
   await page.locator("#right").scrollIntoViewIfNeeded();
   const r = await page.locator("#right").boundingBox();
   const x = await page.evaluate(() => window.__invasion.world.player.x);

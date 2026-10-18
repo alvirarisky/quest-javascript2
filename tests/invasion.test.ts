@@ -1,11 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import {
-  missions,
-  pov,
-  partner,
-  clampProgress,
-} from "../src/invasion/missions";
+import { missions, clampProgress } from "../src/invasion/missions";
 test("four locations, eight missions, sixteen actionable preparation steps", () => {
   assert.equal(missions.length, 8);
   assert.equal(new Set(missions.map((m) => m.background)).size, 4);
@@ -16,18 +11,15 @@ test("four locations, eight missions, sixteen actionable preparation steps", () 
     for (const t of m.tasks) {
       assert.ok(t.instruction.length < 140);
       if (t.choices) assert.equal(t.choices.filter((c) => c.correct).length, 1);
+      assert.ok(!(t.choices && t.puzzle));
     }
   }
-});
-test("POV alternates; partner never occupies the controlled role", () => {
-  for (const opening of ["noah", "allie"] as const)
-    for (let i = 0; i < 8; i++) {
-      assert.notEqual(pov(opening, i), partner(opening, i));
-      assert.equal(
-        pov(opening, i),
-        i % 2 === 0 ? opening : opening === "noah" ? "allie" : "noah",
-      );
-    }
+  // Solo story: nobody else is on the radio.
+  assert.doesNotMatch(JSON.stringify(missions), /partner|POV|Allie|Noah/i);
+  assert.deepEqual(
+    missions.map((m) => m.escape),
+    ["run", "quiet", "run", "hide", "run", "defend", "quiet", "run"],
+  );
 });
 test("checkpoint clamps prep progress and retains answered activation stage", () => {
   assert.equal(clampProgress(-4, false), 0);

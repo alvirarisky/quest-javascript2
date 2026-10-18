@@ -5,13 +5,15 @@ const b = await chromium.launch({
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 });
 const p = await b.newPage({ viewport: { width: 390, height: 844 } });
-await p.goto("http://127.0.0.1:5173/?qa=1");
+await p.goto((process.env.BASE_URL || "http://127.0.0.1:5173") + "/?qa=1");
 await p.waitForFunction(() => !document.querySelector("#start").disabled);
 await p.locator("#name").fill("Layout");
 await p.locator("#student").fill("QA");
+await p.locator("#kelas").fill("QA");
 await p.locator("#start").click();
 await p.locator("#play").waitFor();
 await p.locator("#skipIntro").click();
+await p.locator("#beginMission").click();
 await p.waitForTimeout(400);
 console.log(
   await p.evaluate(() => ({
