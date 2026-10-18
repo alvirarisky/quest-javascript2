@@ -1,0 +1,1711 @@
+@font-face {
+  font-family: Oswald;
+  src: url("/fonts/oswald-variable.ttf");
+  font-display: swap;
+}
+@font-face {
+  font-family: Source;
+  src: url("/fonts/sourcesans3-variable.ttf");
+  font-display: swap;
+}
+:root {
+  font-family: Source, Arial, sans-serif;
+  color: #e2e8de;
+  background: #0a1418;
+  font-synthesis: none;
+  --amber: #e3bd78;
+  --mint: #9ac7ad;
+  --muted: #9dafa8;
+  --line: #2c4146;
+  --panel: #122329;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  color: inherit;
+  background: #182d33;
+  border: 1px solid #3a5157;
+  border-radius: 3px;
+  padding: 11px 17px;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+button:hover {
+  background: #254047;
+  border-color: var(--amber);
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+}
+.primary {
+  background: var(--amber);
+  color: #172528;
+  border-color: var(--amber);
+  font-weight: 700;
+}
+.primary:hover {
+  background: #f4d39c;
+  color: #172528;
+}
+.quiet {
+  background: transparent;
+  border-color: var(--line);
+  text-align: left;
+  font-size: 13px;
+}
+input {
+  border: 1px solid #456068;
+  background: #0b1d23;
+  color: #edf3e9;
+  padding: 10px 12px;
+  min-width: 0;
+}
+h1,
+h2,
+h3 {
+  font-family: Oswald, Arial, sans-serif;
+  font-weight: 500;
+  margin: 0;
+}
+h2 {
+  font-size: 30px;
+  line-height: 1.2;
+}
+em {
+  font-style: normal;
+  color: var(--amber);
+}
+p {
+  line-height: 1.5;
+}
+small {
+  font-size: 11px;
+}
+.eyebrow {
+  font: 10px/1.6 monospace;
+  letter-spacing: 2px;
+  color: var(--amber);
+}
+[hidden] {
+  display: none !important;
+}
+kbd {
+  font: 10px monospace;
+  color: var(--muted);
+  margin-left: 5px;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.landing {
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+  background: #0b191e;
+}
+.landing-art {
+  position: absolute;
+  inset: 0 0 0 35%;
+  background-image:
+    linear-gradient(90deg, #0b191e 0%, #0b191e22 38%, #0b191e00 80%),
+    url("/art/invasion-environments.png");
+  background-size:
+    100% 100%,
+    200% 200%;
+  background-position:
+    center,
+    right bottom;
+}
+.landing-art:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #0b191e 0%, transparent 28%, #0b191e22);
+  pointer-events: none;
+}
+.art-label {
+  position: absolute;
+  right: 5vw;
+  top: 50px;
+  color: #adc4b4;
+  font: 10px monospace;
+  letter-spacing: 3px;
+  writing-mode: vertical-rl;
+}
+.landing-content {
+  position: relative;
+  width: min(680px, 58%);
+  padding: 35px 0 80px 6vw;
+  z-index: 1;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #e2e8de;
+  text-decoration: none;
+  font: 24px Oswald;
+  margin-bottom: 35px;
+}
+.brand span {
+  font: 9px monospace;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+.landing h1 {
+  font-size: clamp(75px, 8.5vw, 130px);
+  line-height: 0.9;
+  letter-spacing: -3px;
+  margin: 15px 0 20px;
+}
+.landing h1 em span {
+  color: var(--mint);
+}
+.tagline {
+  font-size: 25px;
+  line-height: 1.2;
+  margin: 0 0 15px;
+  letter-spacing: -0.5px;
+}
+.description {
+  font-size: 15px;
+  color: #aebfb6;
+  max-width: 420px;
+  margin: 0 0 26px;
+}
+.field-label {
+  display: block;
+  font: 10px monospace;
+  letter-spacing: 1px;
+  color: var(--amber);
+}
+.field-label span {
+  display: block;
+  color: var(--muted);
+  font: 12px Source;
+  letter-spacing: 0;
+  margin-top: 6px;
+}
+.characters {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 16px;
+  max-width: 460px;
+}
+.character {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 3px;
+  text-align: left;
+  padding: 8px;
+  background: #10242be6;
+}
+.character.selected {
+  border-color: var(--amber);
+  box-shadow: inset 0 -2px var(--amber);
+  background: #27342e;
+}
+.character > span:nth-child(2) {
+  font: 18px Oswald;
+}
+.character small {
+  display: block;
+  font: 11px Source;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.character b {
+  align-self: flex-start;
+  margin-left: auto;
+  color: #63776e;
+  font: 10px monospace;
+}
+.portrait {
+  display: block;
+  flex-shrink: 0;
+  width: 62px;
+  height: 70px;
+  background-size: 300% 200%;
+  background-position: 0 0;
+}
+.portrait.noah {
+  background-image: url("/art/noah-side.png");
+}
+.portrait.allie {
+  background-image: url("/art/allie-side.png");
+}
+.identity {
+  display: flex;
+  gap: 12px;
+  max-width: 460px;
+  margin: 16px 0;
+}
+.identity label {
+  font-size: 12px;
+  color: var(--muted);
+  flex: 1;
+  min-width: 0;
+}
+.identity input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+}
+#startError {
+  color: var(--amber);
+  font-size: 13px;
+  max-width: 460px;
+  min-height: 18px;
+}
+.menu-note {
+  color: #8ea59a;
+  font-size: 12px;
+  margin: 15px 0 0;
+}
+.landing-bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 6vw;
+  right: 5vw;
+  display: flex;
+  justify-content: space-between;
+  color: #9bab99;
+  font: 9px monospace;
+  letter-spacing: 1.3px;
+  gap: 20px;
+}
+#play {
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.game-header {
+  height: 76px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  background: #0d1c22;
+}
+.wordmark {
+  font: 24px Oswald;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+.wordmark span {
+  display: block;
+  font: 8px monospace;
+  letter-spacing: 3px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+#actNav {
+  display: flex;
+  gap: 26px;
+  font: 10px monospace;
+  letter-spacing: 1px;
+  color: #647e78;
+}
+#actNav span {
+  padding: 28px 0;
+}
+#actNav .active {
+  color: var(--amber);
+  box-shadow: 0 2px var(--amber);
+}
+#actNav .done {
+  color: var(--mint);
+}
+.header-tools {
+  display: flex;
+  gap: 8px;
+}
+.header-tools button {
+  font-size: 12px;
+  padding: 9px 12px;
+}
+.game-layout {
+  display: grid;
+  grid-template-columns: 254px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+.mission-rail {
+  background: #102128;
+  border-right: 1px solid var(--line);
+  padding: 28px 22px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.mission-rail h1 {
+  font-size: 35px;
+  line-height: 1.16;
+  margin: 12px 0;
+}
+.mission-rail #location {
+  font: 10px/1.6 monospace;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+.operator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.operator .portrait {
+  width: 47px;
+  height: 65px;
+}
+.operator small {
+  display: block;
+  font: 8px monospace;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+.operator strong {
+  display: block;
+  font: 20px Oswald;
+  margin: 3px 0;
+}
+.operator #radioPartner {
+  font-size: 11px;
+  color: var(--mint);
+}
+.rail-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 23px 0 12px;
+}
+#steps {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 22px;
+}
+#steps li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-height: 45px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #738983;
+  border-left: 1px solid var(--line);
+  padding-left: 12px;
+}
+#steps li span:first-child {
+  font: 11px monospace;
+  width: 20px;
+  flex-shrink: 0;
+}
+#steps .current {
+  border-color: var(--amber);
+  color: var(--amber);
+  background: #e3bd780c;
+}
+#steps .done {
+  color: var(--mint);
+}
+.inventory {
+  padding: 13px 0 18px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: #d2d9c8;
+}
+.inventory p {
+  margin: 0 0 10px;
+}
+#help {
+  margin-top: auto;
+}
+.grade-note {
+  font-size: 11px;
+  color: #8ca298;
+  margin: 14px 0 0;
+}
+.scene-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: #09171b;
+}
+.scene-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 22px;
+  gap: 10px;
+  font: 9px monospace;
+  letter-spacing: 1px;
+  color: #a5b5a5;
+  flex-shrink: 0;
+  border-bottom: 1px solid #233b3b;
+}
+#sceneTime {
+  color: var(--amber);
+  white-space: nowrap;
+}
+#arena {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #152e31, #081518);
+}
+#arena canvas {
+  display: block;
+}
+.radio-strip {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 22px;
+  min-height: 53px;
+  background: #112a2d;
+  border-top: 1px solid #35564d;
+  flex-shrink: 0;
+}
+.radio-dot {
+  width: 6px;
+  height: 6px;
+  background: #a9d6b3;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #9dc99d;
+  flex-shrink: 0;
+}
+#radioWho {
+  font: 9px monospace;
+  letter-spacing: 1px;
+  color: #a8d4b2;
+  white-space: nowrap;
+}
+#radioText {
+  font-size: 13px;
+  color: #cfddcc;
+  margin: 0;
+}
+.villain-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 22px;
+  background: #291e20;
+  flex-shrink: 0;
+}
+.villain-strip > span {
+  font: 9px monospace;
+  color: #d7a88f;
+  white-space: nowrap;
+}
+.villain-strip p {
+  font-size: 12px;
+  margin: 0;
+  color: #bfaba4;
+}
+.villain-strip small {
+  margin-left: auto;
+  font: 8px monospace;
+  letter-spacing: 1px;
+  color: #977e76;
+}
+.villain-strip.silent {
+  background: #102024;
+}
+.villain-strip.silent > span,
+.villain-strip.silent p,
+.villain-strip.silent small {
+  color: #68857a;
+}
+.objective-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 16px 22px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--line);
+}
+.objective-bar small {
+  font: 9px monospace;
+  letter-spacing: 1.5px;
+  color: var(--amber);
+}
+.objective-bar p {
+  font-size: 17px;
+  line-height: 1.3;
+  margin: 7px 0 0;
+}
+.objective-bar button {
+  font: 12px Source;
+  white-space: nowrap;
+  min-height: 42px;
+}
+.scene-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 22px;
+  flex-shrink: 0;
+  color: #78958c;
+  font: 10px monospace;
+}
+.touch {
+  display: flex;
+  gap: 6px;
+  touch-action: none;
+}
+.touch button {
+  padding: 5px 13px;
+  font-size: 12px;
+}
+#saveStatus {
+  font-size: 11px;
+  color: var(--amber);
+  margin: 0 22px;
+}
+#saveStatus:empty {
+  display: none;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #041014d9;
+  backdrop-filter: blur(9px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: auto;
+}
+.card {
+  width: min(690px, 100%);
+  max-height: calc(100svh - 48px);
+  overflow: auto;
+  background: #11252c;
+  border: 1px solid #405c5b;
+  box-shadow: 0 25px 100px #0009;
+  padding: 28px;
+  border-top: 3px solid var(--amber);
+}
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+.card-top p {
+  margin: 0;
+}
+.card-top button {
+  font-size: 12px;
+  padding: 7px 11px;
+}
+.card > p {
+  color: #c6d5c6;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.card details {
+  margin: 14px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.card summary {
+  cursor: pointer;
+  display: list-item;
+}
+.card pre {
+  font: 12px/1.6 monospace;
+  background: #0a1b20;
+  padding: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.quiz-card {
+  width: min(780px, 100%);
+}
+#choices {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+  padding: 13px 16px;
+  background: #142e35;
+}
+.option > span {
+  font: 20px Oswald;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+.option code {
+  font: 13px/1.6 monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.option.selected {
+  border-color: var(--amber);
+  background: #343e30;
+}
+.card .score-state {
+  font-size: 12px;
+  color: var(--muted);
+}
+#feedback,
+#taskFeedback {
+  color: var(--amber);
+  font-size: 14px;
+  min-height: 20px;
+}
+.field-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 8px;
+  width: 100%;
+  padding: 18px;
+  margin: 12px 0;
+}
+.field-choice strong {
+  font-size: 17px;
+}
+.field-choice span {
+  font-size: 14px;
+  color: var(--muted);
+}
+.field-choice.incorrect {
+  border-color: #b87b5c;
+}
+.setting {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.setting input {
+  accent-color: var(--amber);
+}
+#modalBody {
+  white-space: pre-wrap;
+  line-height: 1.65;
+  color: #c3d4c9;
+  font-size: 15px;
+}
+.result-overlay {
+  background:
+    radial-gradient(ellipse at top, #203e3be8, #051218ed),
+    url("/art/invasion-environments.png") right bottom/200% 200%;
+}
+.result-card {
+  text-align: center;
+  width: min(800px, 100%);
+  padding: 35px;
+}
+.result-card h1 {
+  font-size: 52px;
+  line-height: 1.1;
+}
+.ending-mark {
+  font: 40px Oswald;
+  color: var(--mint);
+  margin: 10px auto 20px;
+  border: 1px solid #648978;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+}
+.ending-copy {
+  max-width: 460px;
+  margin: 20px auto;
+}
+.result-card #resultIdentity {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.result-card #resultScore {
+  font: 58px Oswald;
+  color: var(--amber);
+}
+.result-card #resultStatus {
+  font-size: 13px;
+}
+.result-card details {
+  text-align: left;
+}
+.result-card .actions {
+  justify-content: center;
+  margin-top: 25px;
+}
+#review {
+  font-size: 13px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+}
+#review p {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 0;
+  margin: 0;
+}
+@media (min-width: 1500px) {
+  .game-layout {
+    grid-template-columns: 290px minmax(0, 1fr);
+  }
+  .mission-rail {
+    padding: 35px 30px;
+  }
+  .mission-rail h1 {
+    font-size: 42px;
+  }
+}
+@media (max-height: 760px) and (min-width: 901px) {
+  .mission-rail {
+    padding: 19px 20px;
+  }
+  .mission-rail h1 {
+    font-size: 29px;
+    margin: 8px 0;
+  }
+  .rail-divider {
+    margin: 12px 0 8px;
+  }
+  #steps {
+    margin-bottom: 10px;
+  }
+  #steps li {
+    min-height: 37px;
+  }
+  .operator .portrait {
+    height: 50px;
+    width: 42px;
+  }
+  .inventory {
+    padding: 9px 0;
+  }
+  .grade-note {
+    margin: 10px 0 0;
+  }
+  .game-header {
+    height: 65px;
+  }
+  .scene-top {
+    padding: 9px 18px;
+  }
+  .radio-strip {
+    padding: 9px 18px;
+    min-height: 45px;
+  }
+  .objective-bar {
+    padding: 12px 18px;
+  }
+  .objective-bar p {
+    font-size: 15px;
+  }
+  .scene-controls {
+    padding: 6px 18px;
+  }
+  .landing-content {
+    padding-top: 25px;
+  }
+  .brand {
+    margin-bottom: 20px;
+  }
+  .landing h1 {
+    font-size: 85px;
+  }
+  .tagline {
+    font-size: 22px;
+  }
+  .description {
+    margin-bottom: 18px;
+  }
+  .characters {
+    margin: 10px 0;
+  }
+  .character .portrait {
+    height: 54px;
+    width: 48px;
+  }
+}
+@media (max-width: 1100px) {
+  #actNav {
+    gap: 14px;
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .game-header {
+    padding: 0 18px;
+    gap: 15px;
+  }
+  .game-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+  .mission-rail {
+    padding: 22px 16px;
+  }
+  .mission-rail h1 {
+    font-size: 30px;
+  }
+  .villain-strip small {
+    display: none;
+  }
+  .landing-content {
+    width: 65%;
+    padding-left: 5vw;
+  }
+  .landing-art {
+    left: 25%;
+  }
+}
+@media (max-width: 900px) {
+  #play {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+  .game-header {
+    height: 65px;
+  }
+  #actNav {
+    display: none;
+  }
+  .game-layout {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+  }
+  .mission-rail {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 18px 20px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    gap: 4px 15px;
+  }
+  .mission-rail > .eyebrow {
+    grid-column: 1;
+  }
+  .mission-rail h1 {
+    font-size: 27px;
+    margin: 3px 0;
+    grid-column: 1;
+  }
+  .mission-rail #location {
+    margin: 0;
+    grid-column: 1;
+  }
+  .operator {
+    grid-column: 2;
+    grid-row: 1/4;
+  }
+  .mission-rail .rail-divider,
+  .mission-rail #steps,
+  .mission-rail .inventory,
+  .mission-rail .grade-note,
+  .mission-rail #steps ~ .eyebrow {
+    display: none;
+  }
+  .mission-rail > p.eyebrow {
+    display: none;
+  }
+  #help {
+    grid-column: 1/-1;
+    margin-top: 8px;
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+  .scene-column {
+    min-height: 0;
+  }
+  #arena {
+    height: auto;
+    aspect-ratio: 1200/650;
+    flex: none;
+    min-height: 0;
+  }
+  .radio-strip {
+    padding: 12px 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+  .radio-strip p {
+    width: 100%;
+    font-size: 13px;
+  }
+  .radio-dot {
+    margin-top: 3px;
+  }
+  .villain-strip {
+    padding: 8px 16px;
+    gap: 8px;
+  }
+  .villain-strip p {
+    font-size: 11px;
+  }
+  .objective-bar {
+    padding: 15px 16px;
+    gap: 15px;
+  }
+  .objective-bar p {
+    font-size: 15px;
+  }
+  .scene-controls {
+    padding: 8px 16px;
+  }
+  .landing-content {
+    width: 75%;
+    padding: 30px 25px 80px;
+  }
+  .landing-art {
+    left: 0;
+    opacity: 0.5;
+  }
+  .landing-content:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #0b191ef0, #0b191e80);
+    z-index: -1;
+  }
+  .landing h1 {
+    font-size: 95px;
+  }
+  .landing-bottom {
+    left: 25px;
+  }
+  .landing-bottom span:last-child {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  .landing-content {
+    width: 100%;
+    padding: 25px 22px 70px;
+  }
+  .brand {
+    margin-bottom: 25px;
+  }
+  .landing h1 {
+    font-size: 86px;
+  }
+  .tagline {
+    font-size: 23px;
+  }
+  .description {
+    font-size: 14px;
+    max-width: 320px;
+  }
+  .character {
+    padding: 7px 5px;
+  }
+  .character .portrait {
+    width: 47px;
+    height: 60px;
+  }
+  .character small {
+    font-size: 10px;
+  }
+  .identity {
+    gap: 9px;
+  }
+  .identity input {
+    font-size: 14px;
+    width: 100%;
+  }
+  .landing .actions button {
+    flex: 1;
+  }
+  .field-label {
+    font-size: 9px;
+  }
+  .landing-art {
+    background-position:
+      center,
+      right bottom;
+  }
+  .art-label {
+    display: none;
+  }
+  .wordmark {
+    font-size: 20px;
+  }
+  .wordmark span {
+    font-size: 7px;
+  }
+  .header-tools button {
+    padding: 8px;
+    font-size: 11px;
+  }
+  .header-tools kbd {
+    display: none;
+  }
+  .mission-rail h1 {
+    font-size: 25px;
+  }
+  .operator .portrait {
+    width: 35px;
+    height: 48px;
+  }
+  .operator strong {
+    font-size: 17px;
+  }
+  .operator #radioPartner {
+    font-size: 9px;
+  }
+  .operator small {
+    font-size: 7px;
+  }
+  .mission-rail #location {
+    font-size: 8px;
+  }
+  .scene-top {
+    padding: 10px 14px;
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .objective-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .objective-bar button {
+    width: 100%;
+  }
+  .scene-controls > span {
+    font: 9px/1.4 monospace;
+    max-width: 190px;
+  }
+  .scene-controls .touch button {
+    padding: 8px 13px;
+  }
+  .villain-strip {
+    flex-wrap: wrap;
+  }
+  .villain-strip p {
+    font-size: 11px;
+  }
+  .overlay {
+    padding: 12px;
+  }
+  .card {
+    padding: 20px;
+    max-height: calc(100svh - 24px);
+  }
+  .card h2 {
+    font-size: 25px;
+  }
+  .card .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .card > p {
+    font-size: 14px;
+  }
+  .option {
+    padding: 12px;
+    gap: 10px;
+  }
+  .option code {
+    font-size: 11px;
+  }
+  .card .actions button {
+    flex: 1;
+  }
+  .result-card h1 {
+    font-size: 35px;
+  }
+  #review {
+    grid-template-columns: 1fr;
+  }
+  .field-choice {
+    padding: 15px;
+  }
+  .field-choice strong {
+    font-size: 15px;
+  }
+  .field-choice span {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* Immersive HUD: the world carries the scene, guidance is temporary. */
+.landing-content {
+  padding-top: 8vh;
+  max-width: 580px;
+}
+.landing .brand {
+  margin-bottom: 7vh;
+}
+.landing h1 {
+  font-size: clamp(80px, 10vw, 145px);
+}
+.landing .tagline {
+  margin: 24px 0 36px;
+  font-size: 20px;
+  color: #bac6bb;
+}
+.landing .eyebrow,
+.art-label,
+.landing-bottom {
+  display: none;
+}
+.landing-art {
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, #080e12 4%, #080e12d9 34%, #080e1210 78%),
+    url("/art/invasion-environments.png");
+}
+.landing .characters {
+  max-width: 380px;
+}
+.character {
+  border: 0;
+  border-bottom: 1px solid #687668;
+  background: transparent;
+}
+.character.selected {
+  background: #d9c89e12;
+  box-shadow: none;
+}
+.landing .identity {
+  max-width: 380px;
+}
+.landing input {
+  background: #0b131bb3;
+  border-color: #ffffff26;
+}
+.landing .actions {
+  margin-top: 24px;
+}
+#play {
+  position: relative;
+  height: 100svh;
+  min-height: 0;
+  overflow: hidden;
+  background: #05090c;
+}
+.game-header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 8;
+  height: 78px;
+  padding: 0 32px;
+  border: 0;
+  background: linear-gradient(#05090cdd, transparent);
+  pointer-events: none;
+}
+.game-header .header-tools {
+  pointer-events: auto;
+}
+.wordmark {
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+.wordmark span,
+#actNav {
+  display: none;
+}
+.header-tools button {
+  background: #06101670;
+  border-color: #ffffff28;
+  border-radius: 30px;
+  min-width: 40px;
+  min-height: 40px;
+}
+.game-layout {
+  display: block;
+  height: 100%;
+  flex: 1;
+}
+.mission-rail {
+  display: none;
+}
+.scene-column {
+  position: relative;
+  display: block;
+  height: 100%;
+  background: #05090c;
+}
+#arena {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  background: #05090c;
+}
+.scene-top {
+  position: absolute;
+  top: 87px;
+  left: 32px;
+  z-index: 6;
+  border: 0;
+  padding: 0;
+  display: block;
+  font: 10px Source;
+  letter-spacing: 2px;
+  color: #d5dbd2;
+  text-shadow: 0 2px 5px black;
+  pointer-events: none;
+}
+#sceneTime {
+  display: none;
+}
+.objective-bar {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  z-index: 7;
+  padding: 0;
+  border: 0;
+  gap: 12px;
+  flex-direction: row;
+  align-items: center;
+}
+.objective-bar > div {
+  display: none;
+}
+.objective-bar button {
+  border-radius: 30px;
+  min-height: 48px;
+  padding: 12px 24px;
+  width: auto;
+  font-size: 13px;
+  box-shadow: 0 6px 30px #0008;
+}
+#stepAction {
+  background: #ded9ca;
+  border-color: #ded9ca;
+  color: #162021;
+}
+#pulse {
+  background: #11282ded;
+  color: #c3eee4;
+  border-color: #a5ded77a;
+}
+#play.escaping #stepAction {
+  background: #e5b17d;
+  border-color: #e5b17d;
+}
+.scene-controls {
+  position: absolute;
+  z-index: 7;
+  bottom: 34px;
+  left: 32px;
+  padding: 0;
+  gap: 14px;
+  color: #d0d7cc;
+  text-shadow: 0 2px 5px black;
+}
+.touch button {
+  min-height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  background: #0812178c;
+  border-color: #ffffff3a;
+}
+.scene-controls > span {
+  font: 11px Source;
+}
+.radio-strip {
+  position: absolute;
+  z-index: 6;
+  bottom: 100px;
+  left: 50%;
+  transform: translate(-50%, 8px);
+  width: max-content;
+  max-width: min(620px, 85%);
+  background: #050c10cf;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 18px;
+  min-height: 0;
+  opacity: 0;
+  transition:
+    opacity 0.35s,
+    transform 0.35s;
+  pointer-events: none;
+  display: block;
+  text-align: center;
+}
+.radio-visible .radio-strip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.radio-dot {
+  display: none;
+}
+#radioWho {
+  font: 9px Source;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 4px;
+}
+#radioText {
+  font-size: 15px;
+  line-height: 1.35;
+}
+.villain-strip {
+  display: none;
+}
+#saveStatus {
+  position: absolute;
+  z-index: 8;
+  top: 125px;
+  left: 32px;
+  background: #101b20;
+}
+.overlay {
+  background: #020708a6;
+  backdrop-filter: blur(5px);
+}
+.card {
+  background: #0e191eed;
+  border: 1px solid #aebdb239;
+  border-radius: 12px;
+  border-top: 1px solid #aebdb239;
+  padding: 30px;
+}
+.card h2 {
+  font-size: 30px;
+}
+.card-top .eyebrow {
+  letter-spacing: 1px;
+}
+.card button {
+  border-radius: 6px;
+}
+#taskPanel {
+  align-items: flex-end;
+  padding-bottom: 110px;
+  background: linear-gradient(transparent, #030a10a6);
+  backdrop-filter: none;
+}
+.task-card {
+  width: min(620px, 100%);
+}
+#taskInstruction {
+  display: none;
+}
+#taskChoices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+.field-choice {
+  margin: 0;
+  min-height: 100px;
+  justify-content: center;
+  background: #17282d;
+}
+.field-choice strong {
+  font-size: 17px;
+  font-weight: 500;
+}
+.field-choice span {
+  font-size: 12px;
+  line-height: 1.35;
+}
+#taskFeedback:empty,
+#feedback:empty {
+  display: none;
+}
+#scoreState {
+  font-size: 11px;
+}
+.cinematic {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow: hidden;
+  background: #000;
+  color: #eee9df;
+}
+.cinema-shot {
+  position: absolute;
+  inset: 8% 0;
+  background: url("/art/invasion-environments.png") left top/200% 200%;
+  transform: scale(1.04);
+  transition:
+    transform 4s linear,
+    filter 1.5s,
+    opacity 1s;
+  filter: brightness(0.6);
+}
+.beat-0 .cinema-shot {
+  transform: scale(1.13);
+}
+.beat-1 .cinema-shot {
+  background-position: right bottom;
+  transform: scale(1.2);
+  filter: brightness(0.6) saturate(0.6);
+}
+.beat-2 .cinema-shot,
+.beat-3 .cinema-shot {
+  opacity: 0;
+}
+.cinema-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#0008, transparent 35%, #000b);
+}
+.cinema-meta {
+  position: absolute;
+  top: 13%;
+  left: 7%;
+  font: 14px monospace;
+  letter-spacing: 3px;
+}
+.cinema-meta span {
+  display: block;
+  font-size: 9px;
+  margin-top: 10px;
+  color: #9da79c;
+}
+#skipIntro {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+}
+.cinema-copy {
+  position: absolute;
+  bottom: 17%;
+  left: 10%;
+  right: 10%;
+  text-align: center;
+}
+.cinema-copy small {
+  font: 10px monospace;
+  letter-spacing: 3px;
+  color: #adc4b5;
+}
+.cinema-copy h2 {
+  font: 400 clamp(22px, 3vw, 40px) Source;
+  margin-top: 14px;
+}
+.beat-1 .cinema-copy small {
+  color: #d49c80;
+}
+.cinema-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font: 500 clamp(50px, 11vw, 140px) Oswald;
+  letter-spacing: 4px;
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none;
+}
+.cinema-title small {
+  font: 9px Source;
+  letter-spacing: 4px;
+  margin-top: 20px;
+  color: #9caaa0;
+}
+.beat-3 .cinema-title {
+  opacity: 1;
+}
+.beat-3 .cinema-meta {
+  opacity: 0;
+}
+.cinema-progress {
+  position: absolute;
+  bottom: 8%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: #ffffff15;
+}
+.cinema-progress span {
+  display: block;
+  width: 25%;
+  height: 1px;
+  background: #d0ccbd;
+  transition: width 3s linear;
+}
+.beat-1 .cinema-progress span {
+  width: 50%;
+}
+.beat-2 .cinema-progress span {
+  width: 75%;
+}
+.beat-3 .cinema-progress span {
+  width: 100%;
+}
+.cinematic.still * {
+  transition: none;
+  transform: none;
+}
+@media (max-width: 700px) {
+  .landing-content {
+    width: 100%;
+    padding: 28px 24px 40px;
+  }
+  .landing .brand {
+    margin-bottom: 30px;
+  }
+  .landing h1 {
+    font-size: 90px;
+  }
+  .landing .tagline {
+    margin: 22px 0 28px;
+  }
+  .game-header {
+    padding: 0 16px;
+    height: 65px;
+  }
+  .scene-top {
+    top: 70px;
+    left: 18px;
+    font-size: 9px;
+  }
+  .scene-controls {
+    bottom: 22px;
+    left: 16px;
+  }
+  .scene-controls > span {
+    display: none;
+  }
+  .objective-bar {
+    right: 16px;
+    bottom: 80px;
+    gap: 8px;
+  }
+  .objective-bar button {
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+  .radio-strip {
+    bottom: 142px;
+    max-width: 90%;
+    width: max-content;
+  }
+  #radioText {
+    font-size: 13px;
+  }
+  #taskPanel {
+    padding-bottom: 140px;
+  }
+  .task-card {
+    padding: 20px;
+  }
+  #taskChoices {
+    gap: 8px;
+  }
+  .field-choice {
+    padding: 12px;
+  }
+  .field-choice strong {
+    font-size: 15px;
+  }
+  .header-tools {
+    gap: 5px;
+  }
+  .cinema-title small {
+    letter-spacing: 1.5px;
+  }
+}
+@media (max-height: 500px) {
+  .game-header {
+    height: 54px;
+  }
+  .scene-top {
+    top: 56px;
+  }
+  .scene-controls {
+    bottom: 12px;
+  }
+  .objective-bar {
+    bottom: 12px;
+  }
+  .radio-strip {
+    bottom: 70px;
+  }
+  #taskPanel {
+    padding-bottom: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinematic * {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+.plot-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  background: #040a0feb;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+.plot-reveal > div {
+  max-width: 620px;
+}
+.plot-reveal small {
+  color: var(--amber);
+  font: 11px monospace;
+  letter-spacing: 3px;
+}
+.plot-reveal h2 {
+  font-size: clamp(38px, 6vw, 72px);
+  margin-top: 18px;
+}
+.plot-reveal p {
+  font-size: clamp(18px, 2vw, 24px);
+  color: #b6c5bd;
+  line-height: 1.5;
+}
+.plot-reveal button {
+  margin-top: 16px;
+  border-radius: 30px;
+  background: transparent;
+}

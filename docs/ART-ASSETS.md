@@ -1,0 +1,35 @@
+# Dead Signal — aset original
+
+Ketiga aset dibuat dengan tool ImageGen built-in pada sesi implementasi ini, lalu disalin ke project. Tidak memakai hotlink. Font lokal berasal dari repo referensi milik pengguna; lisensi OFL disertakan dalam `public/fonts/`.
+
+- `public/art/survivors-infected.png`: atlas transparan 4×4, 1254×1254. Baris: Allie, Noah, infected, heavy. Kolom hasil aktual: timur, selatan, barat, utara. Frame dipotong saat runtime oleh Phaser, tanpa mengubah file sumber. Gerak menggunakan arah sprite dan procedural bob/impact; bukan animasi berjalan berframe lengkap.
+- `public/art/dead-signal-city.png`: ilustrasi kota pesisir untuk menu dan results.
+- `public/art/city-props.png`: atlas transparan 3×2, 1536×1024: minimarket, gudang, sedan, ambulans, barrel, kontainer. Frame runtime disesuaikan dengan collider.
+
+Referensi identitas: `female-sprite.png` dan `male-sprite.png` dari https://github.com/alvirarisky/quest-javascript. Jaket merah/kacamata Allie dan jaket gelap/rambut hitam Noah dipertahankan. Aset baru merupakan adaptasi kamera overhead, bukan sprite side-view yang diputar.
+
+## Prompt sprite (built-in)
+
+Use case: stylized-concept. Production game sprite atlas on truly transparent background. References ONLY establish adult protagonists' identity: Allie with long black hair, glasses, red jacket and dark trousers, Noah with short messy black hair, charcoal jacket and dark trousers. Create a square 1024x1024 atlas of exactly 16 individual game sprites in a perfect 4 columns x 4 rows grid, each 256x256 cell, centered with generous transparent margins, no lines, no text. Camera is consistent bird's-eye top-down at 60 degree downward angle, small readable full-body sprites as in a polished 2D zombie action game, painted comic-realistic rendering, no ground or shadows outside sprite. Row 1: Allie holding a pistol facing EAST, NORTH, WEST, SOUTH in that order. Row 2: Noah holding a pistol facing EAST, NORTH, WEST, SOUTH. Row 3: a ragged pale infected zombie in torn olive civilian clothes, arms reaching, facing EAST, NORTH, WEST, SOUTH. Row 4: large stocky mutated infected wearing damaged orange industrial protective gear, arms reaching, facing EAST, NORTH,WEST,SOUTH. Each character fits wholly in its own cell, no overlap, consistent scale within row. Keep faces and garments consistent with references but change to overhead game view. Actual alpha transparency, no atmospheric background, no labels. These are usable sprites, not a mockup.
+
+Catatan: generator menghasilkan 1254×1254 dan arah selatan/utara terbalik dari urutan prompt; loader memakai ukuran aktual dan urutan aktual.
+
+## Prompt kota (built-in)
+
+Use case: illustration-story. Asset: cinematic title-screen background for original zombie action game DEAD SIGNAL, wide landscape 16:9 composition. Rainy abandoned Indonesian coastal city at blue hour before dawn. Seen from elevated isometric overhead game-like view, empty main road snakes toward distant harbor ferry and antenna, wrecked cars, closed small storefronts, warm amber emergency lamps, wet asphalt and industrial detail. A crowd of small zombie silhouettes gathers far away at right middle; no close-up gore. Moody richly illustrated painterly graphic novel environment, polished game key art, nuanced dark petrol blue and muted olive with warm orange lights. LEFT HALF is mostly dark negative space and low-contrast street suitable for title overlay. Right half has environmental detail and atmosphere. No people protagonists in foreground, no text, no lettering, no logos, no UI. Original composition, not copied from any existing game.
+
+## Prompt properti (built-in)
+
+Production 2D zombie game ENVIRONMENT PROP ATLAS, exactly SIX isolated objects in a perfect THREE columns by TWO rows grid. Landscape canvas 1536x1024 intended; each cell square equal size. True transparent background around every object, no ground planes, no text, no logos. All viewed from near-overhead at 60 degree downward camera, coherent muted petrol-grey, olive and weathered amber painterly realistic game art. Top row left: small abandoned minimarket building seen from above, detailed flat corrugated roof, vents, dirty storefront facing viewer, no letters. Top row middle: rectangular industrial warehouse building roof, pipes and air conditioning, worn walls and shutter. Top row right: wrecked dark teal sedan viewed from overhead, long axis horizontal, front facing RIGHT, cracked windshield, small rust damage. Bottom row left: abandoned white ambulance red cross, viewed overhead, long axis horizontal, front facing RIGHT, weathered and damaged, no text. Bottom row middle: single rust-orange oil barrel viewed overhead, readable cylindrical rim. Bottom row right: horizontal long olive shipping container viewed overhead, corrugated metal and rust. Each object centered inside its own cell, full object contained with 12 percent transparent margins. Every object completely separate. No people, no zombies, no backgrounds, no grid lines, no labels. Crisp useful game sprites matching a serious graphic novel zombie survival game.
+
+## Reuse karakter samping (15 Oktober 2026)
+
+`public/art/noah-side.png` dan `allie-side.png` disalin tanpa perubahan dari `public/assets/characters/male-sprite.png` dan `female-sprite.png` pada repo pengguna https://github.com/alvirarisky/quest-javascript (checkout lokal `/private/tmp/selector-strike-quest-reference`). Dipakai untuk arah visual The Last Shift yang diminta pengguna. Sheet 3 × 2, frame 512 × 512; frame 0 diam dan 1–2 berjalan. Atlas top-down sebelumnya hanya dipakai sebagai zombie latar pada versi kuis.
+
+## Alien Outbreak — atlas empat lingkungan (18 Oktober 2026)
+
+Aset baru: `public/art/invasion-environments.png` (1774 × 887). Dibuat dengan built-in ImageGen, tanpa gambar referensi eksternal. Original disimpan di `/Users/alvirariskyyulianti/.codex/generated_images/01a14096-8f2e-75b3-9413-aa45c838d7e8/exec-af624048-8765-4fc6-9eb8-aa9e1653bf70.png` dan disalin tanpa mengubah file sumber. Atlas dipotong menjadi empat frame runtime oleh Phaser; tidak ada NPC atau UI yang dibakar ke background.
+
+Prompt: satu atlas 2 × 2 tanpa margin, empat panel lingkungan game side-view. Gaya painted realistic indie sci-fi horror, teal shadows, amber practical lights, acid-green alien infection, lantai foreground kosong 20%. Panel kiri atas minimarket Indonesia terbengkalai dengan freezer dan pintu kaca; kanan atas klinik karantina dengan lemari obat, ruang isolasi kaca dan pipa sprinkler; kiri bawah stasiun bawah tanah dengan kereta, bangku dan kabinet servis; kanan bawah ruang pemancar tinggi dengan jendela kota, antena dan inti alien organik. Tidak ada manusia, tulisan, logo, border atau UI. Objek interaktif dan karakter ditambahkan lewat kode.
+
+Ilustrasi menara pada menu memakai crop kanan bawah dari atlas yang sama. Background bersifat statis; interaksi, efek UV, penanda ancaman, gerbang dan visual inti dirender terpisah. Tidak mengklaim ada voice acting atau animasi background hasil ImageGen.
